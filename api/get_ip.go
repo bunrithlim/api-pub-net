@@ -15,6 +15,16 @@ import (
 	"strings"
 )
 
+func GetUserPublicIP(r *http.Request) string {
+
+	// We'll always grab the first IP address in the X-Forwarded-For header
+	// list.  We do this because this is always the *origin* IP address, which
+	// is the *true* IP of the user.  For more information on this, see the
+	// Wikipedia page: https://en.wikipedia.org/wiki/X-Forwarded-For
+	ip := net.ParseIP(strings.Split(r.Header.Get("X-Forwarded-For"), ",")[0]).String()
+	return ip;
+}
+
 // GetIP returns a user's public facing IP address (IPv4 OR IPv6).
 //
 // By default, it will return the IP address in plain text, but can also return
@@ -26,11 +36,8 @@ func GetIP(w http.ResponseWriter, r *http.Request, _ httprouter.Params) {
 		panic(err)
 	}
 
-	// We'll always grab the first IP address in the X-Forwarded-For header
-	// list.  We do this because this is always the *origin* IP address, which
-	// is the *true* IP of the user.  For more information on this, see the
-	// Wikipedia page: https://en.wikipedia.org/wiki/X-Forwarded-For
-	ip := net.ParseIP(strings.Split(r.Header.Get("X-Forwarded-For"), ",")[0]).String()
+	// Get the public IP address of the user/request
+	ip := GetUserPublicIP(r)
 
 	// If the user specifies a 'format' querystring, we'll try to return the
 	// user's IP address in the specified format.
