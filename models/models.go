@@ -1,6 +1,6 @@
-// ipify-api/models
+// api-pub-net/models
 //
-// This package contains all models used in the ipify service.
+// This package contains all models used in this service.
 
 package models
 

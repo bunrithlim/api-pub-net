@@ -1,6 +1,6 @@
 {
-	"ImportPath": "github.com/rdegges/ipify-api",
-	"GoVersion": "go1.8",
+	"ImportPath": "github.com/bunrithlim/api-pub-net",
+	"GoVersion": "go1.10.3",
 	"GodepVersion": "v79",
 	"Deps": [
 		{
