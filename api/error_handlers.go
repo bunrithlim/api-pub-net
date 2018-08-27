@@ -1,4 +1,4 @@
-// ipify-api/error_handlers
+// api-pub-net/error_handlers
 //
 // This package holds our API error handlers which we use to service REST API
 // errors.

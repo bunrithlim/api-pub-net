@@ -23,6 +23,17 @@ func main() {
 	router := httprouter.New()
 	router.GET("/", api.GetIP)
 
+	// IP related features
+	router.GET("/ip", api.GetIP)
+
+	// Time related features
+	router.GET("/utc", api.GetTimeUTC)
+	router.GET("/utc/milli", api.GetTimeUTCMilli)
+	router.GET("/utc/nano", api.GetTimeUTCNano)
+
+	// Requester related features
+	router.GET("/who", api.GetRequestInfo)
+
 	// Setup 404 / 405 handlers.
 	router.NotFound = http.HandlerFunc(api.NotFound)
 	router.MethodNotAllowed = http.HandlerFunc(api.MethodNotAllowed)
