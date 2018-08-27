@@ -20,3 +20,19 @@ type RequestInfo struct {
 	UserAgent string `json:"user-agent"`
 	Referrer string `json:"referer"`
 }
+
+// RequestHeader is a struct we use to represent JSON API responses about the request.
+type RequestHeader struct {
+	Header string `json:"header"`
+	Value string `json:"value"`
+}
+
+// RequestHeaders is a struct we use to represent JSON API responses about the request.
+type RequestHeaders struct {
+	Method string `json:"method"`
+	URL string `json:"url"`
+	Protocol string `json:"protocol"`
+	Host string `json:"host"`
+	RemoteIpAddress string `json:"remote_address"`
+	Headers []RequestHeader `json:"headers"`
+}

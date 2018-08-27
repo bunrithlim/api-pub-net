@@ -33,6 +33,7 @@ func main() {
 
 	// Requester related features
 	router.GET("/who", api.GetRequestInfo)
+	router.GET("/who/headers", api.GetRequestHeaders)
 
 	// Setup 404 / 405 handlers.
 	router.NotFound = http.HandlerFunc(api.NotFound)
