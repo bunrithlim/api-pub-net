@@ -21,7 +21,8 @@ func main() {
 
 	// Setup all routes.  We only service API requests, so this is basic.
 	router := httprouter.New()
-	router.GET("/", api.GetIP)
+	router.GET("/", api.GetHome)
+	router.GET("/help", api.GetHelp)
 
 	// IP related features
 	router.GET("/ip", api.GetIP)
