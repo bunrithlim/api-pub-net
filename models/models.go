@@ -4,6 +4,10 @@
 
 package models
 
+import (
+	"net"
+)
+
 // IPAddress is a struct we use to represent JSON API responses for IP addresses.
 type IPAddress struct {
 	IP string `json:"ip"`
@@ -36,3 +40,16 @@ type RequestHeaders struct {
 	RemoteIpAddress string `json:"remote_address"`
 	Headers []RequestHeader `json:"headers"`
 }
+
+// DNSHost is a struct we use to represent JSON API responses for DNS Hosts.
+type DNSAll struct {
+	Cname string `json:"cname"`
+	Host_addrs []string `json:"host"`
+	Mx []*net.MX `json:"mx"`
+	Ns []*net.NS `json:"ns"`
+	Txts []string `json:"txts"`
+	IP []net.IP `json:"ip"`
+}
+
+
+
