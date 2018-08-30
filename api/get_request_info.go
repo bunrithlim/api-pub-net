@@ -11,7 +11,6 @@ import (
 	"github.com/julienschmidt/httprouter"
 	"github.com/bunrithlim/api-pub-net/models"
 	"net/http"
-	"net"
 )
 
 // GetRequestInfo returns info about the HTTP request. Includes, user agent,
