@@ -43,12 +43,12 @@ type RequestHeaders struct {
 
 // DNSHost is a struct we use to represent JSON API responses for DNS Hosts.
 type DNSAll struct {
-	Cname string `json:"cname"`
-	Host_addrs []string `json:"host"`
-	Mx []*net.MX `json:"mx"`
-	Ns []*net.NS `json:"ns"`
-	Txts []string `json:"txts"`
-	IP []net.IP `json:"ip"`
+	Cname string `json:"cname,omitempty"`
+	Host_addrs []string `json:"host,omitempty"`
+	Mx []*net.MX `json:"mx,omitempty"`
+	Ns []*net.NS `json:"ns,omitempty"`
+	Txts []string `json:"txts,omitempty"`
+	IP []net.IP `json:"ip,omitempty"`
 }
 
 

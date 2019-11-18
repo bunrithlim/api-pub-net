@@ -14,6 +14,9 @@ import (
 	"github.com/bunrithlim/api-pub-net/models"
 	"net/http"
 	"net"
+	//"io/ioutil"
+	"log"
+    "net/http/httputil"
 )
 
 const(
@@ -21,6 +24,49 @@ const(
 )
 
 func GetDnsIP(w http.ResponseWriter, r *http.Request, _ httprouter.Params) {
+
+	err := r.ParseForm()
+	if err != nil {
+		panic(err)
+	}
+
+	_host := URL_DNS_DEFAULT_TARGET
+
+	if target, ok := r.Form["target"]; ok && len(target) > 0 {
+        _host = target[0];
+	}
+
+	output := ""
+    log.Print("Host: ", _host)
+	res, err := http.Get(_host)
+	if err != nil {
+		log.Print(err)
+        output = fmt.Sprint(err)
+	} else {
+
+	if res.StatusCode == 200 {
+		//header, herr := ioutil.ReadAll(res.Body)
+        output = fmt.Sprintf("%s\n%s", output, res.Header)
+		//robots, err := ioutil.ReadAll(res.Body)
+        //output = fmt.Sprintf("%s\n\n%s", output, robots)
+
+	dump, derr := httputil.DumpResponse(res, true)
+	if derr != nil {
+		log.Print(derr)
+        output = fmt.Sprint(derr)
+	}
+	output = fmt.Sprintf("%s\n\n%s", output, dump)    
+        
+        
+		res.Body.Close()
+		if err != nil {
+			log.Print(err)
+            output = fmt.Sprint(err)
+		}
+	}
+    }
+	w.Header().Set("Content-Type", "text/plain")
+	fmt.Fprintf(w, string(output))
 }
 
 func GetDnsCname(w http.ResponseWriter, r *http.Request, _ httprouter.Params) {
